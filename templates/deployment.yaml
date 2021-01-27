@@ -8,6 +8,8 @@ metadata:
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
+  strategy:
+    type: Recreate
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
@@ -40,7 +42,7 @@ spec:
             - name: {{ $key }}
               value: "{{ $val }}"
           {{- end }}
-          {{- range $key, $val := .Values.app.secrets }}
+          {{- range $key, $val := .Values.secrets }}
             - name: {{ $key }}
               valueFrom:
                 secretKeyRef:

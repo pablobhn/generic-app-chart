@@ -1,23 +1,24 @@
 replicaCount: 1
 
 image:
-  repository: bijukunjummen/sample-boot-knative-app
-  tag: 0.0.3-SNAPSHOT
+  repository: tutum/hello-world
+  tag: latest
   pullPolicy: IfNotPresent
 
 nameOverride: ""
 fullnameOverride: ""
 
 app:
-  containerPort: 8080
+  containerPort: 80 # 8080
   healthCheckPath: /
   environment: {}
-  secrets: {}
   autoscaling:
-    enabled: false
-    maxReplicas: 2
-    minReplicas: 1
-    targetCPUUtilizationPercentage: 40
+    enabled: true
+    # maxReplicas: 2
+    # minReplicas: 1
+    # targetCPUUtilizationPercentage: 40
+
+secrets: {}
 
 service:
   type: ClusterIP
@@ -25,9 +26,9 @@ service:
 
 ingress:
   enabled: false
-  annotations: {}
-  path: /
-  tls: []
+  # annotations: {}
+  # path: /
+  # tls: []
 
 resources:
   constraints: 
